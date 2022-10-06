@@ -36,8 +36,8 @@ namespace LoggingKata
             var parser = new TacoParser();
 
             // Grab an IEnumerable of locations using the Select command: var locations = lines.Select(parser.Parse);
+            //var locations = lines.Select(line => parser.Parse(line)).ToArray();
             ITrackable[] locations = lines.Select(x => parser.Parse(x)).ToArray();
-
             
             // DON'T FORGET TO LOG YOUR STEPS
 
@@ -53,11 +53,9 @@ namespace LoggingKata
             // Include the Geolocation toolbox, so you can compare locations: `using GeoCoordinatePortable;`
             //HINT NESTED LOOPS SECTION---------------------
             
+            // Do a loop for your locations to grab each location as the origin (perhaps: `locA`)
             for (int i = 0; i < locations.Length; i++)
             {
-
-            
-                // Do a loop for your locations to grab each location as the origin (perhaps: `locA`)
                 var locA = locations[i];
             
                 // Create a new corA Coordinate with your locA's lat and long
@@ -83,14 +81,12 @@ namespace LoggingKata
                         tacoBell1 = locA;
                         tacoBell2 = locB;
                     }
-            
-            
                 }
 
             }
 
-
             logger.LogInfo($"{tacoBell1.Name} and {tacoBell2.Name} are the farthest apart");
+            logger.LogInfo($"{tacoBell1.Name} and {tacoBell2.Name} are {distance * 0.000621} miles apart");
             // Once you've looped through everything, you've found the two Taco Bells farthest away from each other.
         }
     }
